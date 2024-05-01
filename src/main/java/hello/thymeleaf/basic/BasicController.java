@@ -78,6 +78,54 @@ public class BasicController {
         return "basic/link";
     }
 
+    @GetMapping("/literal")
+    public String literal(Model model){
+        model.addAttribute("data", "Spring!");
+        return "basic/literal";
+    }
+
+    @GetMapping("/operation")
+    public String operation(Model model){
+        model.addAttribute("nullData",null);
+        model.addAttribute("data","Spring!");
+        return "basic/operation";
+    }
+
+    @GetMapping("/attribute")
+    public String attribute(){
+        return "basic/attribute";
+    }
+
+    @GetMapping("/each")
+    public String each(Model model){
+        addUsers(model);
+        return "basic/each";
+    }
+
+    @GetMapping("/condition")
+    public String condition(Model model){
+        addUsers(model);
+        return "basic/condition";
+    }
+
+    @GetMapping("/comments")
+    public String comments(Model model){
+        model.addAttribute("data","Srping!");
+        return "basic/comments";
+    }
+
+    @GetMapping("/block")
+    public String block(Model model){
+        addUsers(model);
+        return "basic/block";
+    }
+
+    @GetMapping("/javascript")
+    public String javascript(Model model){
+        model.addAttribute("user",new User("userA",10));
+        addUsers(model);
+        return "basic/javascript";
+    }
     // nested Class의 경우 외부 클래스명.내부클래스명이 기본이라
     // 실제 클래스명은 BasicController.HelloBean이 되고
     // 빈 명을 명시적으로 해주지 않으면 basicController.HelloBean이 Bean의 이름이 된다
@@ -88,6 +136,13 @@ public class BasicController {
         }
     }
 
+    private void addUsers(Model model){
+        List<User> list = new ArrayList<>();
+        list.add(new User("userA",10));
+        list.add(new User("userB",20));
+        list.add(new User("userC",30));
+        model.addAttribute("users",list);
+    }
     @Data
     static class User {
         private String username;
